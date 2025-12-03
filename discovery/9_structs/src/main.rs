@@ -1,7 +1,63 @@
 fn main() {
+    let mut my_flight = Flight::new(
+        String::from("Sao Paulo"),
+        String::from("Doha"),
+        1500.00,
+        780,
+    );
+    println!("{my_flight:?}");
+    my_flight.itinerary();
+    my_flight
+        .change_destination(String::from("Colombo"))
+        .increase_price();
+    my_flight.itinerary();
+    println!("{my_flight:?}");
+    let other_flight = Flight {
+        origin: String::from("Rio de Janeiro"),
+        destination: String::from("Boston"),
+        ..my_flight
+    };
+    println!("{other_flight:?}");
     examples();
 }
 
+#[derive(Debug)]
+struct Flight {
+    origin: String,
+    destination: String,
+    price: f64,
+    passangers: u32,
+}
+
+impl Flight {
+    fn new(origin: String, destination: String, price: f64, passangers: u32) -> Self {
+        Self {
+            origin,
+            destination,
+            price,
+            passangers,
+        }
+    }
+
+    fn change_destination(&mut self, new_destination: String) -> &mut Self {
+        self.destination = new_destination;
+        self
+    }
+
+    fn increase_price(&mut self) -> &mut Self {
+        self.price *= 1.20;
+        self
+    }
+
+    fn itinerary(&self) {
+        println!(
+            "{} -> {}, with {} passangers",
+            self.origin, self.destination, self.passangers
+        );
+    }
+}
+
+// & example of structs and some of their properties
 fn examples() {
     // create an instance of coffee
     let mocha = Coffee {
@@ -41,6 +97,10 @@ fn examples() {
     // use constructor
     let toyota = Car::new(String::from("Toyota"), 2020);
     toyota.display_car();
+
+    // use tuple struct
+    let clock = Clock(10, 30);
+    clock.show_time();
 }
 
 #[derive(Debug)]
@@ -72,6 +132,15 @@ struct Coffee {
     name: String,
     price: f64,
     is_hot: bool,
+}
+
+// tuple struct
+struct Clock(u32, u32);
+
+impl Clock {
+    fn show_time(&self) {
+        println!("The time is: {}:{}", self.0, self.1);
+    }
 }
 
 // fn that returns a coffee
