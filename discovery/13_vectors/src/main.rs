@@ -1,9 +1,11 @@
 use std::vec;
 
+#[derive(Debug)]
 struct File {
     name: String,
 }
 
+#[derive(Debug)]
 struct Folder {
     name: String,
     contents: Vec<File>,
@@ -24,9 +26,25 @@ impl Folder {
     fn delete_file(&mut self, index: usize) -> File {
         self.contents.remove(index)
     }
+
+    fn get_file(&mut self, index: usize) -> Option<&File> {
+        self.contents.get(index)
+    }
 }
 
 fn main() {
+    let mut folder = Folder::new(String::from("Games"));
+    folder.create_file(String::from("RD2"));
+    folder.create_file(String::from("Valorant"));
+    println!("{:?}", folder);
+    println!("{:?}", folder.name);
+    folder.delete_file(1);
+    println!("{:?}", folder);
+    let file = folder.get_file(0);
+    match file {
+        Some(content) => println!("{:?}", content.name),
+        None => println!("No file was found"),
+    }
     examples();
 }
 
