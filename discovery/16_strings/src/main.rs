@@ -42,7 +42,7 @@ fn get_identity() -> String {
         .read_line(&mut last_name)
         .expect("Failed to collect last name");
 
-    first_name.trim().to_string() + " " + last_name.trim()
+    format!("{} {}", first_name.trim(), last_name.trim())
 }
 
 fn example() {
