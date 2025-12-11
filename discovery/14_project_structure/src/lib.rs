@@ -1,5 +1,9 @@
 // import modules (declare the modules inside this lib)
+
+/// Tools for inventory management
 pub mod inventory;
+
+/// Tools for order management
 pub mod orders;
 
 // use internal modules (shortcuts to syntax pieces)
