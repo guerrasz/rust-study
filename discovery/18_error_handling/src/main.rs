@@ -4,7 +4,7 @@ use std::process;
 
 fn main() {
     match write_to_file() {
-        Ok(filename) => println!("Successfully wrote to file {}", filename),
+        Ok(filename) => println!("Successfully wrote to file: {}", filename),
         Err(error) => println!("There was an error: {}", error),
     }
     example();
@@ -20,7 +20,7 @@ fn write_to_file() -> Result<String, io::Error> {
     println!("What would you like to write to the file?");
     stdin().read_line(&mut content)?;
 
-    fs::write(&filename, &content)?;
+    fs::write(&filename.trim(), &content.trim())?;
 
     Ok(filename)
 }
