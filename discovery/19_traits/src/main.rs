@@ -1,5 +1,6 @@
 use traits::doctor::Appointment;
 use traits::duration::Duration;
+use traits::flight::Flight;
 use traits::fruits::{Apple, AppleType};
 use traits::lodging::{Accommodation, AirBnB, Description, Hotel};
 use traits::taxes::{Bonus, Income, Investment, QualityTime, Taxable};
@@ -57,4 +58,12 @@ fn main() {
     println!("{:?}", one_hour);
     println!("{:?}", another_hour);
     println!("{:?}", yet_another_hour);
+
+    let br_lk1 = Flight::new("11", "BR", "LK");
+    let br_lk2 = Flight::new("11", "BR", "LK");
+    let us_lk = Flight::new("11", "US", "LK");
+
+    // both syntaxes are valid here
+    println!("{}", br_lk1.eq(&br_lk2));
+    println!("{}", us_lk == br_lk2);
 }
