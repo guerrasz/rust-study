@@ -4,6 +4,7 @@ use traits::flight::{Bus, Flight};
 use traits::fruits::{Apple, AppleType};
 use traits::job::Job;
 use traits::lodging::{Accommodation, AirBnB, Description, Hotel};
+use traits::meal::Lunch;
 use traits::musician::Musician;
 use traits::taxes::{Bonus, Income, Investment, QualityTime, Taxable};
 use traits::utils;
@@ -98,4 +99,8 @@ fn main() {
     println!("{}", my_job == other_job);
     println!("{}", my_job < other_job);
     println!("{}", my_job > other_job);
+
+    let bread = Lunch { cost: 5.99 };
+    let guyoza = Lunch { cost: 15.99 };
+    println!("{:?}", bread + guyoza);
 }

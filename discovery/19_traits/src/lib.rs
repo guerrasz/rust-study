@@ -4,6 +4,7 @@ pub mod flight;
 pub mod fruits;
 pub mod job;
 pub mod lodging;
+pub mod meal;
 pub mod musician;
 pub mod taxes;
 pub mod utils;
