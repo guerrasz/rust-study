@@ -1,3 +1,5 @@
+use std::ops::Add;
+
 use crate::lodging::{Accommodation, Description};
 
 pub fn book_for_one_night<T: Accommodation + Description>(entity: &mut T, guest: &str) {
@@ -13,4 +15,9 @@ where
 {
     first.get_description();
     second.book("Digas", 2);
+}
+
+// defining a add function that uses generics and defines the output associated value
+pub fn add_two_numbers<T: Add<Output = T>>(a: T, b: T) -> T {
+    a + b
 }

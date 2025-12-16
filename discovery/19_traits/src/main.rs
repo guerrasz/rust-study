@@ -103,4 +103,7 @@ fn main() {
     let bread = Lunch { cost: 5.99 };
     let guyoza = Lunch { cost: 15.99 };
     println!("{:?}", bread + guyoza);
+
+    println!("{}", utils::add_two_numbers(5, 6));
+    println!("{:.2}", utils::add_two_numbers(5.4, 6.2));
 }
