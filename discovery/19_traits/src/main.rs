@@ -39,5 +39,6 @@ fn main() {
         price: 10.0,
     };
 
-    println!("{}", lunch)
+    println!("Normal: {}", lunch);
+    println!("Debug: {:?}", lunch);
 }
