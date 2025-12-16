@@ -1,4 +1,6 @@
 use std::fmt::{Debug, Display, Formatter, Result};
+use std::fs;
+use std::ops::Drop;
 
 pub enum AppleType {
     Red,
@@ -41,5 +43,14 @@ impl Debug for Apple {
             "Apple ::: [Kind: {:?}, Price: {:?}]",
             self.kind, self.price
         )
+    }
+}
+
+impl Drop for Apple {
+    fn drop(&mut self) {
+        match fs::remove_file("apple.txt") {
+            Ok(_) => println!("Goodbye my sweet apple"),
+            Err(error) => println!("Could not delete file, error: {}", error),
+        }
     }
 }

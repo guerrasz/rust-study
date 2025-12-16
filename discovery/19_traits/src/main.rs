@@ -1,3 +1,5 @@
+use traits::doctor::Appointment;
+use traits::duration::Duration;
 use traits::fruits::{Apple, AppleType};
 use traits::lodging::{Accommodation, AirBnB, Description, Hotel};
 use traits::taxes::{Bonus, Income, Investment, QualityTime, Taxable};
@@ -41,4 +43,18 @@ fn main() {
 
     println!("Normal: {}", lunch);
     println!("Debug: {:?}", lunch);
+
+    let morning_app = Appointment::new("Jeff", "09:00AM", "10:00AM");
+    let new_app = morning_app.clone();
+    println!("{} is seeing the patient", new_app.doctor);
+
+    // use the copy trait to not transfer ownership
+    let one_hour = Duration::new(1, 0, 0);
+    let another_hour = one_hour;
+    let yet_another_hour = one_hour.clone();
+
+    // prove that ownership is not transfered
+    println!("{:?}", one_hour);
+    println!("{:?}", another_hour);
+    println!("{:?}", yet_another_hour);
 }
