@@ -3,6 +3,7 @@ use traits::duration::Duration;
 use traits::flight::{Bus, Flight};
 use traits::fruits::{Apple, AppleType};
 use traits::lodging::{Accommodation, AirBnB, Description, Hotel};
+use traits::musician::Musician;
 use traits::taxes::{Bonus, Income, Investment, QualityTime, Taxable};
 use traits::utils;
 
@@ -70,4 +71,14 @@ fn main() {
     // impl for partialeq with generic definition
     let bus_br_lk = Bus::new("36", "BR", "LK");
     println!("{}", br_lk1 == bus_br_lk);
+
+    // using different eq logic for the other way around
+    println!("{}", bus_br_lk == br_lk1);
+
+    // using traits in enums
+    let justin = Musician::Singer(String::from("Justin"));
+    let other_justin = Musician::Singer(String::from("Justin"));
+    let band = Musician::Band(5);
+    println!("{}", justin == other_justin);
+    println!("{}", justin == band);
 }

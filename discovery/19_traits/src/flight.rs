@@ -42,3 +42,11 @@ impl PartialEq<Bus> for Flight {
         self.origin == other.origin && self.destination == other.destination
     }
 }
+
+impl PartialEq<Flight> for Bus {
+    fn eq(&self, other: &Flight) -> bool {
+        self.time == other.time
+    }
+}
+
+impl Eq for Flight {}
