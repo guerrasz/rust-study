@@ -1,3 +1,4 @@
+// you can also have #[derive(PartialEq)] but it will compare all fields
 pub struct Flight {
     pub time: String,
     origin: String,
