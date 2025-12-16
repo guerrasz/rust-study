@@ -1,6 +1,6 @@
 use traits::doctor::Appointment;
 use traits::duration::Duration;
-use traits::flight::Flight;
+use traits::flight::{Bus, Flight};
 use traits::fruits::{Apple, AppleType};
 use traits::lodging::{Accommodation, AirBnB, Description, Hotel};
 use traits::taxes::{Bonus, Income, Investment, QualityTime, Taxable};
@@ -66,4 +66,8 @@ fn main() {
     // both syntaxes are valid here
     println!("{}", br_lk1.eq(&br_lk2));
     println!("{}", us_lk == br_lk2);
+
+    // impl for partialeq with generic definition
+    let bus_br_lk = Bus::new("36", "BR", "LK");
+    println!("{}", br_lk1 == bus_br_lk);
 }

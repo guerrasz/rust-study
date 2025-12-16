@@ -15,8 +15,30 @@ impl Flight {
     }
 }
 
+pub struct Bus {
+    pub time: String,
+    origin: String,
+    destination: String,
+}
+
+impl Bus {
+    pub fn new(time: &str, origin: &str, destination: &str) -> Self {
+        Self {
+            time: time.to_string(),
+            origin: origin.to_string(),
+            destination: destination.to_string(),
+        }
+    }
+}
+
 impl PartialEq for Flight {
     fn eq(&self, other: &Self) -> bool {
+        self.origin == other.origin && self.destination == other.destination
+    }
+}
+
+impl PartialEq<Bus> for Flight {
+    fn eq(&self, other: &Bus) -> bool {
         self.origin == other.origin && self.destination == other.destination
     }
 }
