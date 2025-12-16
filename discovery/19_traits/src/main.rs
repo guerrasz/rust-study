@@ -1,4 +1,6 @@
+use traits::fruits::{Apple, AppleType};
 use traits::lodging::{Accommodation, AirBnB, Description, Hotel};
+use traits::taxes::{Bonus, Income, Investment, QualityTime, Taxable};
 use traits::utils;
 
 fn main() {
@@ -20,4 +22,22 @@ fn main() {
     let stays: Vec<&dyn Description> = vec![&hotel, &airbnb];
     println!("{}", stays[0].get_description());
     println!("{}", stays[1].get_description());
+
+    let income = Income { amount: 20567.34 };
+    println!("${:.2}", income.tax_bill());
+
+    let mut bonus = Bonus { value: 11500.47 };
+    println!("${:.2}", bonus.tax_bill());
+    bonus.double_amount();
+    println!("${:.2}", bonus.tax_bill());
+
+    let time = QualityTime { time: 120 };
+    println!("{}", time.get_amount());
+
+    let lunch = Apple {
+        kind: AppleType::Green,
+        price: 10.0,
+    };
+
+    println!("{}", lunch)
 }
