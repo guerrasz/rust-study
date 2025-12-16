@@ -2,6 +2,7 @@ pub mod doctor;
 pub mod duration;
 pub mod flight;
 pub mod fruits;
+pub mod job;
 pub mod lodging;
 pub mod musician;
 pub mod taxes;

@@ -2,6 +2,7 @@ use traits::doctor::Appointment;
 use traits::duration::Duration;
 use traits::flight::{Bus, Flight};
 use traits::fruits::{Apple, AppleType};
+use traits::job::Job;
 use traits::lodging::{Accommodation, AirBnB, Description, Hotel};
 use traits::musician::Musician;
 use traits::taxes::{Bonus, Income, Investment, QualityTime, Taxable};
@@ -81,4 +82,20 @@ fn main() {
     let band = Musician::Band(5);
     println!("{}", justin == other_justin);
     println!("{}", justin == band);
+
+    // partial ordering
+    let my_job = Job {
+        salary: 10000000,
+        time: 9,
+    };
+
+    let other_job = Job {
+        salary: 10000,
+        time: 8,
+    };
+
+    // gives acces to other signals as >, <, etc...
+    println!("{}", my_job == other_job);
+    println!("{}", my_job < other_job);
+    println!("{}", my_job > other_job);
 }
