@@ -14,8 +14,8 @@ impl ShoppingCart {
     where
         T: FnMut(&mut SupermarketItem),
     {
-        for mut item in &mut self.items {
-            operation(&mut item)
+        for item in &mut self.items {
+            operation(item)
         }
     }
 
