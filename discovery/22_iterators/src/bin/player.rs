@@ -1,6 +1,7 @@
 use std::env;
 
 #[derive(Debug)]
+#[allow(unused)]
 struct Settings {
     video_file: String,
     subtitles: bool,
