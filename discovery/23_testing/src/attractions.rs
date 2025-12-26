@@ -61,8 +61,8 @@ impl TicketSeller for Museum {
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct MovieTheater {
-    movies: Vec<String>,
-    sales: u32,
+    pub movies: Vec<String>,
+    pub sales: u32,
 }
 
 impl MovieTheater {
@@ -73,7 +73,7 @@ impl MovieTheater {
         }
     }
 
-    fn add_movie(&mut self, movie: &str) {
+    pub fn add_movie(&mut self, movie: &str) {
         self.movies.push(movie.to_string());
     }
 }
