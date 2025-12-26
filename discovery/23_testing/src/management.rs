@@ -2,13 +2,13 @@
 use crate::attractions::TicketSeller;
 
 #[derive(Debug)]
-struct VenueManagement<T: TicketSeller> {
-    venue: T,
+pub struct VenueManagement<T: TicketSeller> {
+    pub venue: T,
     manager: Option<String>,
 }
 
 impl<T: TicketSeller> VenueManagement<T> {
-    fn new(venue: T) -> Self {
+    pub fn new(venue: T) -> Self {
         Self {
             venue,
             manager: None,
@@ -19,7 +19,7 @@ impl<T: TicketSeller> VenueManagement<T> {
         self.manager = Some(manager.to_string());
     }
 
-    fn make_money(&mut self) {
+    pub fn make_money(&mut self) {
         self.venue.sell_ticket();
     }
 }

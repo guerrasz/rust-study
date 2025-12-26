@@ -5,22 +5,22 @@ pub trait TicketSeller {
 }
 
 #[derive(Debug, PartialEq, Eq)]
-struct Museum {
+pub struct Museum {
     paitings: Vec<String>,
-    revenue: u32,
+    pub revenue: u32,
 }
 
 impl Museum {
     const MAXIMUM_CAPACITY: usize = 3;
 
-    fn new() -> Self {
+    pub fn new() -> Self {
         Self {
             paitings: vec![],
             revenue: 0,
         }
     }
 
-    fn buy_painting(&mut self, painting: &str) {
+    pub fn buy_painting(&mut self, painting: &str) {
         if self.paitings.len() >= Self::MAXIMUM_CAPACITY {
             panic!("Museum does not have storage space for another painting")
         }

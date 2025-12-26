@@ -1,2 +1,2 @@
-mod attractions;
-mod management;
+pub mod attractions;
+pub mod management;
