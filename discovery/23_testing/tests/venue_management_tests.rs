@@ -36,7 +36,7 @@ fn movie_theater_management(
 fn venue_management_interacts_with_venue(mut museum_management: VenueManagement<Museum>) {
     museum_management.make_money();
 
-    assert_eq!(museum_management.venue.revenue, 25);
+    assert_eq!(museum_management.venue.revenue, 35);
 }
 
 #[rstest]

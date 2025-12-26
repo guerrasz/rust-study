@@ -55,7 +55,11 @@ impl Museum {
 
 impl TicketSeller for Museum {
     fn sell_ticket(&mut self) {
-        self.revenue += 25;
+        if self.has_impressive_collection() {
+            self.revenue += 35
+        } else {
+            self.revenue += 25;
+        }
     }
 }
 
@@ -101,6 +105,18 @@ mod tests {
                 "The revenue from ticket sell did not meet expectations.",
             ))
         }
+    }
+
+    #[test]
+    fn museum_with_impressive_art_collection_charges_more() {
+        let mut museum = Museum::new();
+        museum.buy_painting("Foo");
+        museum.buy_painting("Bar");
+        museum.buy_painting("Buz");
+
+        museum.sell_ticket();
+
+        assert_eq!(museum.revenue, 35);
     }
 
     #[test]
