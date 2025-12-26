@@ -6,29 +6,50 @@ pub trait TicketSeller {
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct Museum {
-    paitings: Vec<String>,
+    pub paintings: Vec<String>,
     pub revenue: u32,
 }
 
 impl Museum {
     const MAXIMUM_CAPACITY: usize = 3;
 
+    /// creates a new museum instance
+    ///
+    /// # Examples:
+    /// ```
+    /// use testing::attractions::Museum;
+    ///
+    /// let museum = Museum::new();
+    /// let empty_vec: Vec<String> = Vec::new();
+    /// assert_eq!(museum.paintings, empty_vec);
+    /// assert_eq!(museum.revenue, 0);
+    /// ```
     pub fn new() -> Self {
         Self {
-            paitings: vec![],
+            paintings: vec![],
             revenue: 0,
         }
     }
 
+    /// buys paintings for the museum
+    ///
+    /// # Examples
+    /// ```
+    /// use testing::attractions::Museum;
+    ///
+    /// let mut museum = Museum::new();
+    /// museum.buy_painting("Foo");
+    /// assert_eq!(museum.paintings, vec!["Foo".to_string()]);
+    /// ```
     pub fn buy_painting(&mut self, painting: &str) {
-        if self.paitings.len() >= Self::MAXIMUM_CAPACITY {
+        if self.paintings.len() >= Self::MAXIMUM_CAPACITY {
             panic!("Museum does not have storage space for another painting")
         }
-        self.paitings.push(painting.to_string());
+        self.paintings.push(painting.to_string());
     }
 
     fn has_impressive_collection(&self) -> bool {
-        self.paitings.len() > 2
+        self.paintings.len() > 2
     }
 }
 
