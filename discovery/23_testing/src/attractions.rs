@@ -48,7 +48,7 @@ impl Museum {
         self.paintings.push(painting.to_string());
     }
 
-    fn has_impressive_collection(&self) -> bool {
+    pub fn has_impressive_collection(&self) -> bool {
         self.paintings.len() > 2
     }
 }
