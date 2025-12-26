@@ -1,5 +1,5 @@
 #![allow(unused)]
-use crate::attractions::{MovieTheater, TicketSeller};
+use crate::attractions::TicketSeller;
 
 #[derive(Debug)]
 struct VenueManagement<T: TicketSeller> {
@@ -29,10 +29,16 @@ mod tests {
     use super::*;
     use pretty_assertions::assert_eq;
 
+    // create a dummy venue to avoid other code compelxity of functionality/latency during testing
+    struct DummyVenue {}
+
+    impl TicketSeller for DummyVenue {
+        fn sell_ticket(&mut self) {}
+    }
+
     #[test]
     fn venue_management_can_hire_manager() {
-        let movie_theater = MovieTheater::new();
-        let mut venue_management = VenueManagement::new(movie_theater);
+        let mut venue_management = VenueManagement::new(DummyVenue {});
         venue_management.hire_manager("Lucas");
         assert_eq!(venue_management.manager, Some(String::from("Lucas")));
     }
