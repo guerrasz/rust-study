@@ -17,6 +17,8 @@ fn main() {
     let format = "%Y**%m**%d !! %H:%M:%S %z";
 
     // map event_data vector and filter when parsing errors out the value is removed from the array
+    // when the value is correctly converted the value is added as an UTC datetime with its message
+    // then the array is collected as an Vec<(DateTime<UTC>, &str)>
     let events = event_data
         .into_iter()
         .filter_map(|(timestamp, message)| {
@@ -31,11 +33,14 @@ fn main() {
     // aux variables for the loop
     let display_format = "%Y-%m-%d %H:%M:%S";
     let mut previous: Option<DateTime<Utc>> = None;
-
+    
+    // for each iteration print the information like this
     for (utc_datetime, message) in events {
         let display_time = utc_datetime.format(display_format);
         println!("Event time: {}", display_time);
         println!("Event message: {}", message);
+
+        // if previous is none this wont run
         if let Some(previous_event) = previous {
             let difference = utc_datetime - previous_event;
             let hours = difference.num_hours();
@@ -46,6 +51,8 @@ fn main() {
                 hours, minutes, seconds
             );
         }
+
+        // define a value for previous after first iteration
         previous = Some(utc_datetime);
         println!();
     }
