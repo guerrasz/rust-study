@@ -1,13 +1,57 @@
 use regex::Regex;
 
-fn main() {
-    let re = Regex::new(r"ue").unwrap();
-    let text = "my movie queue";
+#[derive(Debug)]
+struct LogEntry {
+    timestamp: String,
+    category: String,
+    endpoint: String,
+    id: String,
+}
 
-    match re.find(text) {
-        Some(data) => {
-            println!("{:?}", data)
-        }
-        None => println!("No match found"),
-    }
+fn main() {
+    // Each entry includes the following pieces of
+    // information:
+    // - A timestamp (ex: 2025-06-15 14:32:10)
+    // - A category (ex: INFO)
+    // - An endpoint (ex: orders)
+    // - A product id (ex: 12345)
+    let server_logs = vec![
+        "[2025-06-15 14:32:10] INFO: User 127.0.0.1 requested /api/orders/12345",
+        "[2025-06-15 14:33:02] ERROR: Failed to fetch /api/users/9876",
+        "[2025-06-15 14:34:55] DEBUG: User 10.0.0.1 requested /api/products/999",
+        "!!!!",
+        "[2025-06-15 14:35:01] INFO: User 192.168.1.5 requested /api/orders/54321",
+        "[2025-06-15 14:35:45] ERROR: Failed to fetch /api/products/4567",
+        "!!!!",
+        "[2025-06-15 14:36:12] WARN: User 10.0.0.99 requested /api/users/101",
+        "[2025-06-15 14:37:09] INFO: User 127.0.0.1 requested /api/categories/88",
+        "[2025-06-15 14:37:59] WARN: Malformed URL detected",
+        "[2025-06-15 14:38:42] INFO: User 172.16.0.10 requested /api/orders/11111",
+        "[2025-06-15 14:39:00] DEBUG: Skipping health check ping",
+        "[2025-06-15 14:40:20] ERROR: Failed to fetch /api/orders/00000",
+        "!!!!",
+    ];
+
+    let re = Regex::new(
+        r"^\[(?<timestamp>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2})\]\s(?<category>\w+?):\s.+?/api/(?<endpoint>\w+?)/(?<id>\d+?)$",
+    )
+    .unwrap();
+
+    let logs_entrys: Vec<LogEntry> = server_logs
+        .into_iter()
+        .filter_map(|entry| {
+            let result = re.captures(entry);
+            match result {
+                Some(captures) => Some(LogEntry {
+                    timestamp: captures["timestamp"].to_string(),
+                    category: captures["category"].to_string(),
+                    endpoint: captures["endpoint"].to_string(),
+                    id: captures["id"].to_string(),
+                }),
+                None => None,
+            }
+        })
+        .collect();
+
+    println!("{:#?}", logs_entrys);
 }
