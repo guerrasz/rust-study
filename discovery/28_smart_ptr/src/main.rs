@@ -33,6 +33,7 @@ impl TextTransformer for WhitespaceTransformer {
     }
 }
 
+#[allow(unused)]
 enum Case {
     Uppercase,
     Lowercase,
